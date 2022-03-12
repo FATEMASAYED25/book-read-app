@@ -1,45 +1,16 @@
 import React, { Component } from 'react'
 import {Link} from "react-router-dom";
-
 class ListBooks extends Component {
 state ={
-  shelf:'',
-  bookId:'',
-  currentRead:[],
-  wantRead:[],
-  read:[]
+
 }
 
 
- handler=(e)=>{
-   this.setState({
-    bookId:e.currentTarget.value
-    })
-    //get the target book 
-const book1=e.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement;
-//make many actions related to the bookid when click on the option
-switch(this.state.bookId){
 
-  case "currentlyReading": this.state.currentRead.push(book1) ;
-  break;
-  
-  
-  case  "wantToRead": this.state.wantRead.push(book1);
-  break;
-  
-  
-  case  "read":  this.state.read.push(book1);
-  break;
-  
- 
-  
-  }
-
-
- }
  
     render() {
       const {books}=this.props
+    
               return (
          
             <div className="list-books">
@@ -52,18 +23,21 @@ switch(this.state.bookId){
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                      {books.map(book =>{return(
+                      {books.map(book =>{
+                        if(book.shelf === "currentlyReading"){
+                        
+                        return(
                       <li key={book.id}>
-                        <div className="book" id={this.state.bookId} >
+                        <div className="book" >
                           <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193,backgroundImage: `url(${book.imageLinks})` }}></div>
                             <div className="book-shelf-changer">
-                              <select>
-                                <option value="move">Move to...</option>
-                                <option value="currentlyReading" onClick={this.handler}>Currently Reading</option>
-                                <option value="wantToRead" onClick={this.handler}>Want to Read</option>
-                                <option value="read" onClick={this.handler}>Read</option>
-                                <option value="none" onClick={this.handler}>None</option>
+                              <select onChange={(e)=>{(book.shelf) = e.target.value}}>
+                                <option value="move" disabled>Move to...</option>
+                                <option value="currentlyReading">Currently Reading</option>
+                                <option value="wantToRead">Want to Read</option>
+                                <option value="read">Read</option>
+                                <option value="none">None</option>
                               </select>
                             </div>
                           </div>
@@ -71,7 +45,7 @@ switch(this.state.bookId){
                           <div className="book-authors">{book.authors}</div>
                         </div>
                       </li>
-                )})}
+                )}})}
                     </ol>
                   </div>
                 </div>
@@ -79,18 +53,21 @@ switch(this.state.bookId){
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                    {books.map(book =>{return(
+                    {books.map(book =>{
+                        if(book.shelf === "wantToRead"){
+                      
+                      return(
                       <li key={book.id}>
-                        <div className="book" id={this.state.bookId}>
+                        <div className="book" >
                           <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks})` }}></div>
                             <div className="book-shelf-changer">
-                            <select>
-                                <option value="move">Move to...</option>
-                                <option value="currentlyReading" onClick={this.handler}>Currently Reading</option>
-                                <option value="wantToRead" onClick={this.handler}>Want to Read</option>
-                                <option value="read" onClick={this.handler}>Read</option>
-                                <option value="none" onClick={this.handler}>None</option>
+                            <select onChange={(e)=>{(book.shelf) = e.target.value}}>
+                                <option value="move" disabled>Move to...</option>
+                                <option value="currentlyReading"   >Currently Reading</option>
+                                <option value="wantToRead"   >Want to Read</option>
+                                <option value="read"   >Read</option>
+                                <option value="none"   >None</option>
                               </select>
                             </div>
                           </div>
@@ -98,7 +75,7 @@ switch(this.state.bookId){
                           <div className="book-authors">{book.authors}</div>
                         </div>
                       </li>
-                      )})}
+                      )}})}
                     </ol>
                   </div>
                 </div>
@@ -106,18 +83,20 @@ switch(this.state.bookId){
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                    {books.map(book =>{return(
+                    {books.map(book =>{
+                        if(book.shelf === "read"){
+                      return(
                       <li key={book.id}>
-                        <div className="book" id={this.state.bookId}>
+                        <div className="book">
                           <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url(${book.imageLinks})` }}></div>
                             <div className="book-shelf-changer">
-                            <select>
-                                <option value="move">Move to...</option>
-                                <option value="currentlyReading" onClick={this.handler}>Currently Reading</option>
-                                <option value="wantToRead" onClick={this.handler}>Want to Read</option>
-                                <option value="read" onClick={this.handler}>Read</option>
-                                <option value="none" onClick={this.handler}>None</option>
+                            <select onChange={(e)=>{(book.shelf) = e.target.value}}>
+                                <option value="move" disabled>Move to...</option>
+                                <option value="currentlyReading"   >Currently Reading</option>
+                                <option value="wantToRead"   >Want to Read</option>
+                                <option value="read"   >Read</option>
+                                <option value="none"   >None</option>
                               </select>
                             </div>
                           </div>
@@ -125,7 +104,7 @@ switch(this.state.bookId){
                           <div className="book-authors">{book.authors}</div>
                         </div>
                       </li>
-                      )})}
+                      )}})}
                     </ol>
                   </div>
                 </div>
