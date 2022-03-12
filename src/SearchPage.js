@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 class SearchPage extends Component {
   state = {
     query: "",
-    books:[]
+  
   }
 
 
@@ -17,24 +17,22 @@ class SearchPage extends Component {
     this.setState({
       query: e.currentTarget.value
     })
-    axios.get("BookAPI.search").then((books) => {
-      this.setState((currentState) => ({
-      books: currentState.books.filter((c) => (
-          c.title.toLowerCase().includes(this.state.query.toLowerCase())
-        ))
-      }))
-    })
-    console.log(this.state.books)
+ 
 
     
   }
 
   render() {
 
-    const { query ,books} = this.state;
+    const { query} = this.state;
+    const {books} =this.props;
 
     // filter the books depends on the new value has written down in the query state 
- 
+    const filterBooks= query ==="" 
+    ? books
+    : books.filter((c)=>(
+        c.title.toLowerCase().includes(query.toLowerCase())
+    ))
 
     return (
       <div className="search-books">
@@ -53,14 +51,14 @@ class SearchPage extends Component {
         <div className="search-books-results">
 
           <ol className="books-grid">
-            {books.map(book => {
+            {filterBooks.map(book => {
               return (
                 <li key={book.id}>
                   <div className="book">
                     <div className="book-top">
                       <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks})` }}></div>
                       <div className="book-shelf-changer">
-                        <select>
+                        <select onChange={(e)=>{(book.shelf) = e.target.value}}>
                           <option value="move" disabled>Move to...</option>
                           <option value="currentlyReading">Currently Reading</option>
                           <option value="wantToRead">Want to Read</option>
