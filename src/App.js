@@ -13,13 +13,9 @@ class App extends Component {
 
 //revoking BooksAPI as a backend server and push all the data to empty array called books 
 
-componentDidMount() {
-  BooksAPI.getAll()
-    .then((books) => {
-      this.setState(() => ({
-        books
-      }))
-    })
+async componentDidMount() {
+ const books= await BooksAPI.getAll();
+      this.setState({books});
     console.log(this.state.books)
   
 }
