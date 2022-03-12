@@ -7,7 +7,7 @@ import { Route ,Routes } from 'react-router-dom';
 class App extends Component {
   state = {
     books:[],
-    allBooks:[]
+   
    
   }
 
@@ -20,6 +20,7 @@ componentDidMount() {
         books
       }))
     })
+    console.log(this.state.books)
   
 }
 
@@ -31,7 +32,7 @@ componentDidMount() {
         <Routes>
     
     <Route  path='/'  element= {<ListBooks books={this.state.books} />} />
-     <Route path='/search' element={<SearchPage/>} />
+     <Route path='/search' element={<SearchPage books={this.state.books} />} />
      </Routes>
       </div>
     )
