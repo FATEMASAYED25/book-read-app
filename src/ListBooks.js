@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
 import {Link} from "react-router-dom";
+import * as BooksAPI from './BooksAPI';
 class ListBooks extends Component {
 state ={
 
 }
 
+changeHandeler=(e)=>{
 
+  
+}
 
  
     render() {
-      const {books}=this.props
+      const {books ,updateShelf}=this.props
     
               return (
          
@@ -30,14 +34,18 @@ state ={
                       <li key={book.id}>
                         <div className="book" >
                           <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 193,backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
+                            <div className="book-cover" style={{ width: 128, height: 193,backgroundImage: `url(${ book.imageLinks.thumbnail})` }}></div>
                             <div className="book-shelf-changer">
-                              <select onChange={(e)=>{(book.shelf) = e.target.value}}>
-                                <option value="move" disabled>Move to...</option>
+                              <select value={book.shelf}
+                           onChange={(e)=>updateShelf(book,e.target.value)}
+                              >
+          
+                              <option value="move" disabled>Move to...</option>
+                                <option value="none">None</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
                                 <option value="read">Read</option>
-                                <option value="none">None</option>
+                                
                               </select>
                             </div>
                           </div>
@@ -62,12 +70,14 @@ state ={
                           <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                             <div className="book-shelf-changer">
-                            <select onChange={(e)=>{(book.shelf) = e.target.value}}>
+                            <select value={book.shelf}
+                           onChange={(e)=>updateShelf(book,e.target.value)}
+                              >
                                 <option value="move" disabled>Move to...</option>
-                                <option value="currentlyReading"   >Currently Reading</option>
-                                <option value="wantToRead"   >Want to Read</option>
-                                <option value="read"   >Read</option>
-                                <option value="none"   >None</option>
+                                <option value="none">None</option>
+                                <option value="currentlyReading">Currently Reading</option>
+                                <option value="wantToRead">Want to Read</option>
+                                <option value="read">Read</option>
                               </select>
                             </div>
                           </div>
@@ -91,12 +101,14 @@ state ={
                           <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                             <div className="book-shelf-changer">
-                            <select onChange={(e)=>{(book.shelf) = e.target.value}}>
+                            <select value={book.shelf}
+                           onChange={(e)=>updateShelf(book,e.target.value)}
+                              >
                                 <option value="move" disabled>Move to...</option>
-                                <option value="currentlyReading"   >Currently Reading</option>
-                                <option value="wantToRead"   >Want to Read</option>
-                                <option value="read"   >Read</option>
-                                <option value="none"   >None</option>
+                                <option value="none">None</option>
+                                <option value="currentlyReading">Currently Reading</option>
+                                <option value="wantToRead">Want to Read</option>
+                                <option value="read">Read</option>
                               </select>
                             </div>
                           </div>
