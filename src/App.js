@@ -26,9 +26,7 @@ async componentDidMount() {
  }
 
 updateShelf = (book,shelf) => { 
-  const books= BooksAPI.update(book,shelf);
-  this.setState({books});
-
+   BooksAPI.update(book,shelf);
  }
 
   render() {
