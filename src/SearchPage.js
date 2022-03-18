@@ -6,9 +6,7 @@ class SearchPage extends Component {
     books: [],
    
   }
-  // changing the state depends on the value wich the input has written down
-  //then set state depending on the search query 
-  //then if the query = the name of the book or thubnail inoke the search function wich it setstate the books arry with the required books 
+  // As the user types into the search field, books that match the query are displayed on the page, along with their titles and authors
  onSearch = async (e) => {
   const query = e.target.value;
  
