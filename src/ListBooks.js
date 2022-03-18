@@ -1,15 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from "react-router-dom";
-import * as BooksAPI from './BooksAPI';
+
 class ListBooks extends Component {
-state ={
-
-}
-
-changeHandeler=(e)=>{
-
-  
-}
 
  
     render() {
