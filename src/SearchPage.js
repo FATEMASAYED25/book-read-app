@@ -6,16 +6,25 @@ class SearchPage extends Component {
     books: [],
    
   }
-  // As the user types into the search field, books that match the query are displayed on the page, along with their titles and authors
+//As the user types into the search field, books that match the query are displayed on the page, along with their titles and authors
  onSearch = async (e) => {
   const query = e.target.value;
- 
+  try{
      let booksResult = await BooksAPI.search(query);
       booksResult.map((found) => {
-         this.props.books.find((book) => book.id === found.id);
-      
+        const result =  this.props.books.find((book) => book.id === found.id);
+         if (result !== undefined) {
+          console.log("result", result);
+          found["shelf"] = result.shelf;
+        } else {
+          found["shelf"] = "none";
+        }
       });
       this.setState({ books: booksResult });
+    } catch (error) {
+      this.setState({ books: [] });
+      return;
+    }
   }
 
 
@@ -36,6 +45,7 @@ class SearchPage extends Component {
             <input type="text"
               placeholder="Search by title or author"
               onChange={this.onSearch}
+              
             />
 
           </div>
